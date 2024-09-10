@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Management App</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.2.1/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link href="dist/output.css" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+        }
+        .page-content {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.6s ease-in-out;
+        }
+        .page-content.active {
+            display: block;
+            opacity: 1;
+        }
+        .bg-gradient {
+            background: linear-gradient(to right, #6EE7B7, #3B82F6);
+        }
+        .card {
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .button-primary {
+            background-color: #3B82F6;
+            color: white;
+            border-radius: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        .button-primary:hover {
+            background-color: #2563EB;
+            transform: scale(1.05);
+        }
+        .button-primary:active {
+            background-color: #1E40AF;
+            transform: scale(0.95);
+        }
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #3B82F6;
+            transform: scaleX(0);
+            transform-origin: bottom right;
+            transition: transform 0.3s ease;
+        }
+        .nav-link:hover::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+        .input-field {
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .input-field:focus {
+            border-color: #3B82F6;
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+        }
+        .transition-fade {
+            transition: opacity 0.6s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="bg-gradient p-4 text-white shadow-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-4xl font-bold">Data Management</h1>
+            <ul class="flex space-x-8">
+                <li><a href="#user-data-entry" class="nav-link text-xl hover:text-gray-200">User Data Entry</a></li>
+                <li><a href="#data-management" class="nav-link text-xl hover:text-gray-200">Data Management</a></li>
+                <li><a href="#data-request" class="nav-link text-xl hover:text-gray-200">Data Request</a></li>
+                <li><a href="#token-balance" class="nav-link text-xl hover:text-gray-200">Token Balance</a></li>
+                <li><a href="#token-extraction" class="nav-link text-xl hover:text-gray-200">Token Extraction</a></li>
+                <li><a href="#data-monetization" class="nav-link text-xl hover:text-gray-200">Data Monetization</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="flex-grow container mx-auto px-4 py-8">
+        <section id="user-data-entry" class="page-content active transition-fade">
+            <div class="bg-white p-8 rounded-lg card max-w-md mx-auto border border-gray-200">
+                <h2 class="text-3xl font-semibold mb-6 text-blue-600">User Data Entry</h2>
+                <form id="dataEntryForm">
+                    <div class="mb-6">
+                        <label for="name" class="block text-gray-700 text-lg font-medium">Name</label>
+                        <input type="text" id="name" name="name" class="w-full p-4 border border-gray-300 rounded-lg input-field" required>
+                    </div>
+                    <div class="mb-6">
+                        <label for="email" class="block text-gray-700 text-lg font-medium">Email</label>
+                        <input type="email" id="email" name="email" class="w-full p-4 border border-gray-300 rounded-lg input-field" required>
+                    </div>
+                    <div class="mb-6">
+                        <label for="dataDescription" class="block text-gray-700 text-lg font-medium">Data Description</label>
+                        <textarea id="dataDescription" name="dataDescription" rows="4" class="w-full p-4 border border-gray-300 rounded-lg input-field" required></textarea>
+                    </div>
+                    <button type="submit" class="button-primary">Submit</button>
+                </form>
+            </div>
+        </section>
+
+        <section id="data-management" class="page-content transition-fade">
+            <div class="bg-white p-8 rounded-lg card max-w-md mx-auto border border-gray-200">
+                <h2 class="text-3xl font-semibold mb-6 text-blue-600">Data Management</h2>
+                <form id="dataManagementForm">
+                    <div class="mb-6">
+                        <label for="dataId" class="block text-gray-700 text-lg font-medium">Data ID</label>
+                        <input type="text" id="dataId" name="dataId" class="w-full p-4 border border-gray-300 rounded-lg input-field" required>
+                    </div>
+                    <div class="mb-6">
+                        <label for="action" class="block text-gray-700 text-lg font-medium">Action</label>
+                        <select id="action" name="action" class="w-full p-4 border border-gray-300 rounded-lg input-field" required>
+                            <option value="grant">Grant Ownership</option>
+                            <option value="revoke">Revoke Ownership</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="button-primary">Submit</button>
+                </form>
+            </div>
+        </section>
+
+        <section id="data-request" class="page-content transition-fade">
+            <div class="bg-white p-8 rounded-lg card max-w-md mx-auto border border-gray-200">
+                <h2 class="text-3xl font-semibold mb-6 text-blue-600">Data Request</h2>
+                <button id="requestDataButton" class="button-primary">Simulate Data Request</button>
+            </div>
+        </section>
+
+        <section id="token-balance" class="page-content transition-fade">
+            <div class="bg-white p-8 rounded-lg card max-w-md mx-auto border border-gray-200">
+                <h2 class="text-3xl font-semibold mb-6 text-blue-600">Token Balance</h2>
+                <p id="tokenBalance" class="text-2xl font-semibold text-gray-800">0 Tokens</p>
+                <button id="refreshBalance" class="button-primary mt-4">Refresh Balance</button>
+            </div>
+        </section>
+
+        <section id="token-extraction" class="page-content transition-fade">
+            <div class="bg-white p-8 rounded-lg card max-w-md mx-auto border border-gray-200">
+                <h2 class="text-3xl font-semibold mb-6 text-blue-600">Token Extraction</h2>
+                <button id="withdrawTokens" class="button-primary">Simulate Withdrawal</button>
+            </div>
+        </section>
+
+        <section id="data-monetization" class="page-content transition-fade">
+            <div class="bg-white p-8 rounded-lg card max-w-md mx-auto border border-gray-200">
+                <h2 class="text-3xl font-semibold mb-6 text-blue-600">Data Monetization</h2>
+                <form id="monetizationForm">
+                    <div class="mb-6">
+                        <label for="dataIdMonetize" class="block text-gray-700 text-lg font-medium">Data ID</label>
+                        <input type="text" id="dataIdMonetize" name="dataId" class="w-full p-4 border border-gray-300 rounded-lg input-field" required>
+                    </div>
+                    <div class="mb-6">
+                        <label for="price" class="block text-gray-700 text-lg font-medium">Set Price (in Tokens)</label>
+                        <input type="number" id="price" name="price" class="w-full p-4 border border-gray-300 rounded-lg input-field" required>
+                    </div>
+                    <button type="submit" class="button-primary">Monetize Data</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
